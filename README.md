@@ -56,3 +56,28 @@ export default App;
 [ПРИМЕР С КВАДРАТАМИ](https://codesandbox.io/p/sandbox/ls-1-task-answer-forked-tndkg2?file=%2Fsrc%2FApp.js%3A14%2C1)
 
 [ПРИМЕР С ФОКУСАМИ НА ДВУХ ИНПУТАХ](https://codesandbox.io/p/sandbox/infallible-visvesvaraya-7nxysv?file=%2Fsrc%2FApp.js)
+
+<hr>
+<br>
+<br>
+
+<h2>Нюансы работы</h2>
+
+- [ ] Ссылка на элемент создается в момент первого рендера компонента.
+
+  + первый console.log(ref) выдаст `null`(если это инициализированное зн-е) или `undefned` если инициализации небыло.
+	+ можем вызвать console.log(ref) при первом рендере с помощью `useEffect()` тк он срабатывает как раз при первом рендере и выдаст ссылку на элемент.
+     
+```javascript
+    let squareRef = useRef(null);
+
+    // Выводим зн-е current элемента при первом рендере в консоль
+    // Ссылка создается в момент первого рендера и изначально = null
+    // Поэтому в консоль ее получим с помощью useEffect при первом рендере
+    useEffect(() => {
+      console.log(squareRef.current);
+    }, []);
+
+    // А тут в консоль выведется null, тк этот вывод будет срабатывать до рендера
+    console.log(squareRef)
+```  
