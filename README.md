@@ -52,3 +52,7 @@ export default App;
 <br>
 
 <h2>Примеры</h2>
+
+[ПРИМЕР С КВАДРАТАМИ](https://codesandbox.io/p/sandbox/ls-1-task-answer-forked-tndkg2?file=%2Fsrc%2FApp.js%3A14%2C1)
+
+[ПРИМЕР С ФОКУСАМИ НА ДВУХ ИНПУТАХ](https://codesandbox.io/p/sandbox/infallible-visvesvaraya-7nxysv?file=%2Fsrc%2FApp.js)
