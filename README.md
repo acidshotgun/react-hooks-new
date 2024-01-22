@@ -57,6 +57,8 @@ export default App;
 
 [ПРИМЕР С ФОКУСАМИ НА ДВУХ ИНПУТАХ](https://codesandbox.io/p/sandbox/infallible-visvesvaraya-7nxysv?file=%2Fsrc%2FApp.js)
 
+[ПРИМЕР С DROPDOWNMENU](https://codesandbox.io/p/sandbox/teeest-zw33wt?file=%2Fsrc%2FApp.js%3A21%2C8)
+
 <hr>
 <br>
 <br>
