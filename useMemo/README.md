@@ -130,6 +130,9 @@
 
 ![image](https://github.com/acidshotgun/react-hooks-new/assets/117285472/9b4f66d8-aace-48d3-88bc-4d860cdc7abe)
 
+![image](https://github.com/acidshotgun/react-hooks-new/assets/117285472/40055865-e20d-4079-802a-bf237f5e4d53)
+
+
 <h2>Примеры</h2>
 
 [ПРИМЕР С ТУДУШКОЙ](https://codesandbox.io/p/sandbox/todo-memo-392yxx?file=%2Fsrc%2FTodoList.js%3A14%2C12) комментарии:
