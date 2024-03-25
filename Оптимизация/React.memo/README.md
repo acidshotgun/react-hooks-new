@@ -135,7 +135,7 @@
 - [ ] Чтобы ф-я каждый раз не создавалась по новой - ее следует обернуть в `useCallback()`.
 - [ ] Обернув ф-ю в `useCallback()` - `memo` будет видеть - пересоздалась ли ф-я или нет. И в зависимости от этого перерисовывать компонент.
 
-[ПРИМЕР С ПЕРЕДАЧЕЙ ФУНКЦИИ КАК ПРОПСА](https://codesandbox.io/p/sandbox/react-memo-trouble-callback-yw2cjs?file=%2Fsrc%2FApp.tsx%3A19%2C43)
+[ПРИМЕР С ПЕРЕДАЧЕЙ ФУНКЦИИ КАК ПРОПСА](https://codesandbox.io/p/sandbox/react-memo-function-prop-yw2cjs?file=%2Fsrc%2FApp.tsx)
 
   + Ф-я `handleClick`, обёрнутая в `useCallback()` - не будет персоздаваться при каждом ререндере `App`
   + `MyComponent`, обернутый в `memo` и следящий за ф-й, как за пропсом не будет перерисован, тк ф-я не будет пересоздана (изменятья).
