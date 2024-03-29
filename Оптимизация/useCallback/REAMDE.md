@@ -18,6 +18,7 @@
   ```typescript
     // vlad10 task
     const updateTrainChar = useCallback(
+      // Наша ф-я
       (charIndex: number, charName: any, value: number) => {
         dispatch(
           updateCharacteristics({
