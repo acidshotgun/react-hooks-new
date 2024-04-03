@@ -19,6 +19,8 @@
 
 <h2>Использование</h2>
 
+[ПРОСТОЙ ПРИМЕР](https://codesandbox.io/p/devbox/usecontext-forked-swjgmd?file=%2Fsrc%2FApp.tsx%3A13%2C1)
+
 - [ ] Основные параметры для создания контекста:
 
   + Создание контекста при помощи `createContext()`.
@@ -113,3 +115,54 @@ export const Button = () => {
   );
 };
 ```
+
+<hr>
+<br>
+<br>
+
+<h2>Прошлый пример но более клёвый с кастомным хуком</h2>
+
+[УБЕР ПРИМЕР](https://codesandbox.io/p/devbox/usecontext-gwnmfc?file=%2Fsrc%2FApp.tsx%3A12%2C2)
+
+- [ ] Чтобы не производить постоянные импорты `контекста` и хука `useContext()`, можно создать кастомный хук.
+
+<br>
+
+- [x] Как и что:
+
+  + Так же создаем `AuthProvider` в контексте `AuthContext`, который будет принимать в себя компоненты как `children`, тем самым передавай состояние по контексту.
+  + Чтобы в каждом компоненте не импортировать каждый раз контекст + хук мы можем завернуть это все в кастомный хук.
+  + Таким образом компоненты будут подписываться на стейт при помощи хука.
+     
+  ```typescript
+  import { useContext } from "react";
+  import { AuthContext } from "../contexts/AuthContext";
+
+  // Кастомный хук
+  // Получает контекст при помощи хука useContext()
+  export const useAuth = () => {
+    const { isLogged, setIsLogged } = useContext(AuthContext);
+
+  // Хук возвращает состояние и сеттер для его изменения.
+    return { isLogged, setIsLogged };
+  };
+  ```
+
+  - [x] Итог:
+     
+  + Вызвав кастомный хук - мы получаем состояние и сеттер.
+  + Избегая лишних импортов и код.
+     
+  ```typescript
+  import { useAuth } from "./hooks/useAuth";
+
+  export const Button = () => {
+    const { isLogged, setIsLogged } = useAuth();
+  
+    return (
+      <button onClick={() => setIsLogged((isLogged: boolean) => !isLogged)}>
+        {!isLogged ? "Войти в систему" : "Выйти из системы"}
+      </button>
+    );
+  };
+  ```
