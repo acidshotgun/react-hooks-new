@@ -168,3 +168,78 @@ export const Button = () => {
     );
   };
   ```
+
+<hr>
+<br>
+<br>
+
+<h2>Оптимизация повторного рендеринга при передаче объектов и функций</h2>
+
+- [ ] В случае, если какой-то компонент возвращает дочерние компоненты, обернутые в контекст, в котором переданы объект или ф-я в кач-ве `value` - обновление род. компонента вызовер ререндер для всех компонентов, которые следят за контекстом.
+
+  + это происходит потому, что при ререндере ф-я создается новая.
+  + То же самое и с объектом.
+  + `ПОМНИМ ПРО ЭТО`.
+     
+- [x] Нпример:
+
++ Тут мы имеем ф-ю `login`, которая будет пересоздаваться.
++ И объект со стейтом и ф-ей в кач-ве `value`
+
+```javascript
+  function MyApp() {
+  // Стейт и стейт-сеттер
+    const [currentUser, setCurrentUser] = useState(null);
+
+  // Ф-я изменения стейта + еще какие то данные
+  // Эта ф-я будет пересоздана и вызовет ререндер.
+    function login(response) {
+      storeCredentials(response.credentials);
+      setCurrentUser(response.user);
+    }
+
+  // Передаем как value контекста объект с состоянием и ф-ей
+    return (
+      <AuthContext.Provider value={{ currentUser, login }}>
+        <Page />
+      </AuthContext.Provider>
+    );
+  }
+```
+
+<br>
+
+- [ ] Решение.
+
+- [ ] В кач-ве решения нам нужно мемоизировать создание ф-ии при помощи `useCallback()`
+- [ ] Плюс обернуть объект, который передается в `value` в `useMemo()` - чтобы объект стал мемоизированным результатом вычислений.
+- [ ] В `value` будет передан объект со стейтом и ф-й. Объект будет мемоизирован
+- [x] Это уберет пересоздавания и ререндеры. 
+
+```javascript
+  import { useCallback, useMemo } from 'react';
+
+  function MyApp() {
+  // Стейт
+    const [currentUser, setCurrentUser] = useState(null);
+
+  // Обернули ф-ю в useCallback
+    const login = useCallback((response) => {
+      storeCredentials(response.credentials);
+      setCurrentUser(response.user);
+    }, []);
+
+  // Объект теперь - это результат вычислений обернутый в useMemo()
+    const contextValue = useMemo(() => ({
+      currentUser,
+      login
+    }), [currentUser, login]);
+
+  // value теперь мемоизированный объект.
+    return (
+      <AuthContext.Provider value={contextValue}>
+        <Page />
+      </AuthContext.Provider>
+    );
+  }
+```
