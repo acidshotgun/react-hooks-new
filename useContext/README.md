@@ -150,13 +150,14 @@ export const Button = () => {
 
   - [x] Итог:
      
-  + Вызвав кастомный хук - мы получаем состояние и сеттер.
+  + Вызвав кастомный хук - мы получаем состояние и сеттер для слежки и изменения.
   + Избегая лишних импортов и код.
      
   ```typescript
   import { useAuth } from "./hooks/useAuth";
 
   export const Button = () => {
+    // Получааем стейт и стейт-сеттер
     const { isLogged, setIsLogged } = useAuth();
   
     return (
