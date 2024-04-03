@@ -58,48 +58,35 @@
 - [ ] `Provider` - служит для передачи контекста компонентам. Оборачивает компоненты, которым должен быть доступен контекст.
 
   + Принимает `value` - это параметр (состояние), которое будет передаваться. + Сеттер, который меняет состояние.
+  + Обычно для удобства создание `контекста` и `провайдера` объеденяют в отдельный компонент.
+  + Этот компонент и будет внутри себя рендерить компоненты как `children`.
      
   ```typescript
-    <AuthContext.Provider
-      value={{
-        isLogged,
-        setIsLogged,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  ```
+    import { createContext, useState } from "react";
 
-<br>
-
-- [x] Как это выглядит:
-
-```typescript
-import { createContext, useContext, useState } from 'react';
-
-// Создаем контекст
-const CurrentUserContext = createContext(null);
-
-export default function MyApp() {
-  // Создаем state + setState, которые будут передаваться в контексте
-  const [currentUser, setCurrentUser] = useState(null);
+    // Создаем контекст
+    export const AuthContext = createContext(null);
+    
+    export const AuthProvider = ({ children }) => {
+      // Создаем state + setState, которые будут передаваться в контексте
+      const [isLogged, setIsLogged] = useState(false);
 
   /*
-    Оборачиваем приложение в провайдер, передавая value (это состояние и смена состояния)
-    Компонты, обёрнутые в провайдер имеют доступ к состоянию в контексте.
+    Оборачиваем {children} в провайдер, передавая value (это состояние и смена состояния)
+    Компоненты, обёрнутые в провайдер имеют доступ к состоянию в контексте.
   */
-  return (
-    <CurrentUserContext.Provider
-      value={{
-        currentUser,
-        setCurrentUser
-      }}
-    >
-      <Form />
-    </CurrentUserContext.Provider>
-  );
-}
-```
+      return (
+        <AuthContext.Provider
+          value={{
+            isLogged,
+            setIsLogged,
+          }}
+        >
+          {children}
+        </AuthContext.Provider>
+      );
+    };
+  ```
 
 <br>
 <br>
