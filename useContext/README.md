@@ -173,6 +173,54 @@ export const Button = () => {
 <br>
 <br>
 
+<h2>ЕЩЕ РАЗ БЕСТ ПРАКТИС</h2>
+
+- [x] Для провайдеров создается отдельный файл - компонент 
+
+![image](https://github.com/acidshotgun/react-hooks-new/assets/117285472/090f2811-94ed-4945-97f8-82ca7d32030c)
+
+<br>
+
+- [x] Внутри компонента объявляется и контекст и состояние и провайдер.
+- [x] Не забыть `value` - что передает провайдер и `стейт` и `смена стейта`.
+
+```typescript
+import { createContext, useReducer } from "react";
+
+export const TasksContext = createContext(null);
+
+export const TasksProvider = ({ children }) => {
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+  return (
+    <TasksContext.Provider value={{ tasks, dispatch }}>
+      {children}
+    </TasksContext.Provider>
+  );
+};
+```
+
+<br>
+
+- [x] В корне импортируем компоненты провайдеров и оборачиваем ими приложение, чтобы оно читало контекст.
+
+```typescript
+export default function TaskApp() {
+return (
+  <TasksProvider>
+    <h1>Day off in Kyoto</h1>
+    <AddTask />
+    <TaskList />
+  </TasksProvider>
+);
+}
+``` 
+
+
+<hr>
+<br>
+<br>
+
 <h2>Оптимизация повторного рендеринга при передаче объектов и функций</h2>
 
 - [ ] В случае, если какой-то компонент возвращает дочерние компоненты, обернутые в контекст, в котором переданы объект или ф-я в кач-ве `value` - обновление род. компонента вызовер ререндер для всех компонентов, которые следят за контекстом.
