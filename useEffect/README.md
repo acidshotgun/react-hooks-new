@@ -98,6 +98,50 @@
 
 [ПРИМЕР С ПОДПИСКОЙ НА СОБЫТИЯ БРАУЗЕРА (И ОТПИСКОЙ)](https://codesandbox.io/p/sandbox/useeffect-event-listener-wvgyxl?file=%2Fsrc%2FModal.js)
 
+- [x] Туn стоит кое что отметить:
+
+    + При подписке/отписке на события - ф-я(callback), которая срабатывает при событии - должна быть именованная.
+    + Если будет неименованная - отписка срабатывать не будет и собитие так и останется висеть даже при `unmount` компонента.
+     
+  <br>
+
+    + Это неверный вариант и отписка работать не будет.
+    + Ф-я, которая будет срабатывать по событию должна быть именованной и подставлена на метсто `callback`
+     
+  ```javascript
+    useEffect(() => {
+        // НЕВЕРНО
+        window.addEventListener("click", () => {
+          console.log("КЛИК ПО ОКНУ");
+        });
+    
+        return () => {
+        // НЕВЕРНО
+          window.removeEventListener("click", () => {
+            console.log("КЛИК ПО ОКНУ");
+          });
+        };
+      }, []);
+  ```
+
+  <br>
+
+  - [ ] Верный варик
+
+  ```javascript
+  // Создаем именованную ф-ю
+    let handler = () => {
+      console.log("КЛИК ПО ОКНУ");
+    };
+
+  // И подставляем как callback. Теперь и при отписке срабатывать будет тоже.
+  window.addEventListener("click", handler);
+  // Отписка
+  window.removeEventListener("click", handler);
+  ```
+
+<br>
+
 [ПРИМЕР С ВИДЕО](https://codesandbox.io/p/sandbox/useeffect-video-player-lfrqg7?file=%2Fsrc%2FVideoPlayer.js)
 
 <hr>
