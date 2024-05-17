@@ -28,7 +28,7 @@
 
   + В примере ниже - тображается `Loader`, пока грузится контент `Albums` - компонент.
 
-  [БАЗОВЫЙ ПРИМЕР](https://codesandbox.io/dashboard/sandboxes/REACT%20THEORY/Suspense?workspace=9bcccbf2-9be5-4d55-8fd5-4f86b53dac31)
+  [БАЗОВЫЙ ПРИМЕР](https://codesandbox.io/p/sandbox/base-suspense-4gxz9x?file=%2Fsrc%2FArtistPage.js)
 
 <br>
 <br>
